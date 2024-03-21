@@ -18,9 +18,11 @@ public_users.post("/register", (req,res) => {
   }
 
   // Add the new user to the users array or your database
-  users.push({ username, password });
+  if (isValid(username)) {
+    users.push({ username, password });
+    return res.status(201).json({ message: "User registered successfully" });
+  }
   
-  return res.status(201).json({ message: "User registered successfully" });
 });
 
 // Get the book list available in the shop
